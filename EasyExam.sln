@@ -9,9 +9,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{7638
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AB65EA85-326D-4F89-B66D-6599A9D5D7C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "src\Entities\Entities.csproj", "{CC345D8F-19FB-4CA7-9839-024BB41D2CC9}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC345D8F-19FB-4CA7-9839-024BB41D2CC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC345D8F-19FB-4CA7-9839-024BB41D2CC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC345D8F-19FB-4CA7-9839-024BB41D2CC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC345D8F-19FB-4CA7-9839-024BB41D2CC9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CC345D8F-19FB-4CA7-9839-024BB41D2CC9} = {7A980C94-3E30-48C3-BF2C-2A715435CDFF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED5D1E57-A250-4903-97F0-0680E3DBAD37}
