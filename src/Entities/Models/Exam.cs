@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,6 +8,7 @@ namespace Entities.Models
     /// <summary>
     /// Exam entity
     /// </summary>
+    [BsonIgnoreExtraElements]
     public class Exam : BaseModel
     {
         /// <summary>
