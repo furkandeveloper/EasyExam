@@ -31,8 +31,9 @@ namespace Entities.Models
 
         /// <summary>
         /// Is document active
+        /// Default value true
         /// </summary>
-        public virtual bool IsActive { get; set; } = true;
+        public virtual bool IsDeleted { get; set; }
 
         /// <summary>
         /// Generate object id
