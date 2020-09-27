@@ -24,6 +24,11 @@ namespace Entities.Models
         /// </summary>
         public DateTime EndDate { get; set; } = DateTime.UtcNow.AddHours(1);
 
+        /// <summary>
+        /// Users taking exam
+        /// </summary>
+        public List<User> Users { get; set; } = new List<User>();
+
         // Note: To be Added question model using reflection.
     }
 }
