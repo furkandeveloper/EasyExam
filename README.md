@@ -13,4 +13,12 @@ Follow me;
   - Prepare your coffee.
   - And sit back.
   
+## Todo
+- [ ] Create Exam.
+- [ ] Multiple Choice questions.
+- [ ] Gap fill questions.
+- [ ] True/False questions.
+- [ ] Classic questions. (Comment base)
+- [ ] Exam statistics. For example : Exam average, Most successful person, Person based average etc.
+  
   To be continued...
