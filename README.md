@@ -3,6 +3,7 @@
 </p>
 
 [![CodeFactor](https://www.codefactor.io/repository/github/furkandeveloper/easyexam/badge)](https://www.codefactor.io/repository/github/furkandeveloper/easyexam)
+[![CircleCI](https://circleci.com/gh/furkandeveloper/EasyExam.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
 # Easy Exam Manager For .Net
 
 Heeey, This library aims to simplify the exam space for developers.
