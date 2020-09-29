@@ -1,5 +1,7 @@
 ﻿using Manager.Configuration;
 using Manager.Context;
+using Manager.Repositories.Abstractions;
+using Manager.Repositories.Concrete;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -30,6 +32,7 @@ namespace Manager.Helpers.Extensions
             action.Invoke(mongoSetting);
             services.AddSingleton(mongoSetting);
             services.AddTransient<IEasyExamContext, EasyExamContext>();
+            services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             return services;
         }
     }
