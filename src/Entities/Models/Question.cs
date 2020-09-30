@@ -10,7 +10,7 @@ namespace Entities.Models
     /// <typeparam name="T">
     /// This T must be inherited from the IAnswerModel type.
     /// </typeparam>
-    public class Question<T> : BaseModel where T :class,IAnswerModel,new()
+    public class Question : BaseModel
     {
         /// <summary>
         /// Question Title
@@ -25,7 +25,7 @@ namespace Entities.Models
         /// <summary>
         /// Answer the question
         /// </summary>
-        public List<T> Answers { get; set; } = new List<T>();
+        public dynamic Answers { get; set; }
 
         /// <summary>
         /// Question status flag.

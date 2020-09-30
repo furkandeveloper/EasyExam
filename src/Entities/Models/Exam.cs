@@ -31,6 +31,6 @@ namespace Entities.Models
         /// </summary>
         public List<User> Users { get; set; } = new List<User>();
 
-        // Note: To be Added question model using reflection.
+        public List<Question> Questions { get; set; } = new List<Question>();
     }
 }
