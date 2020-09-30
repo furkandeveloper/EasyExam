@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Manager.Repositories.Abstractions
 {
@@ -10,6 +11,5 @@ namespace Manager.Repositories.Abstractions
     /// </summary>
     public interface IExamRepository : IBaseRepository<Exam>
     {
-
     }
 }
