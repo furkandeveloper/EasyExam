@@ -7,9 +7,6 @@ namespace Entities.Models
     /// <summary>
     /// Question Model
     /// </summary>
-    /// <typeparam name="T">
-    /// This T must be inherited from the IAnswerModel type.
-    /// </typeparam>
     public class Question : BaseModel
     {
         /// <summary>
