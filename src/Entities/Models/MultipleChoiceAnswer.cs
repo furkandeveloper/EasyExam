@@ -14,16 +14,16 @@ namespace Entities.Models
         /// <summary>
         /// Answer Key For Example 'a')
         /// </summary>
-        public string Key { get; set; }
+        public virtual string Key { get; set; }
         
         /// <summary>
         /// Answer value for example a) 'bla bla'
         /// </summary>
-        public string Value { get; set; }
+        public virtual string Value { get; set; }
 
         /// <summary>
         /// This answer is right?
         /// </summary>
-        public bool IsCorrect { get; set; }
+        public virtual bool IsCorrect { get; set; }
     }
 }

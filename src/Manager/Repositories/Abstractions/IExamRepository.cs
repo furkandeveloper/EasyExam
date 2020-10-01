@@ -11,5 +11,18 @@ namespace Manager.Repositories.Abstractions
     /// </summary>
     public interface IExamRepository : IBaseRepository<Exam>
     {
+        /// <summary>
+        /// Begin exam for single user.
+        /// </summary>
+        /// <param name="examId">
+        /// Document id of exam entity.
+        /// </param>
+        /// <param name="user">
+        /// User entity.
+        /// </param>
+        /// <returns>
+        /// Exam.
+        /// </returns>
+        Task<Exam> BeginExamForUserAsync(string examId, User user);
     }
 }
