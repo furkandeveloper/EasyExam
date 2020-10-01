@@ -14,26 +14,26 @@ namespace Entities.Models
         /// <summary>
         /// Exam title
         /// </summary>
-        public string Title { get; set; }
+        public virtual string Title { get; set; }
         
         /// <summary>
         /// Exam Start Date
         /// </summary>
-        public DateTime StartDate { get; set; } = DateTime.UtcNow;
+        public virtual DateTime StartDate { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Exam End date
         /// </summary>
-        public DateTime EndDate { get; set; } = DateTime.UtcNow.AddHours(1);
+        public virtual DateTime EndDate { get; set; } = DateTime.UtcNow.AddHours(1);
 
         /// <summary>
         /// Users taking exam
         /// </summary>
-        public List<User> Users { get; set; } = new List<User>();
+        public virtual List<User> Users { get; set; } = new List<User>();
 
         /// <summary>
         /// Questions in exam.
         /// </summary>
-        public List<Question> Questions { get; set; } = new List<Question>();
+        public virtual List<Question> Questions { get; set; } = new List<Question>();
     }
 }

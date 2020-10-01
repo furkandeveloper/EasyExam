@@ -27,6 +27,6 @@ namespace Entities.Models
         /// <summary>
         /// Users' answers in exam.
         /// </summary>
-        public List<UserExam> UserExams { get; set; } = new List<UserExam>();
+        public virtual List<UserExam> UserExams { get; set; } = new List<UserExam>();
     }
 }
