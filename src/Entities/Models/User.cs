@@ -23,5 +23,10 @@ namespace Entities.Models
         /// User's email
         /// </summary>
         public virtual string Email { get; set; }
+
+        /// <summary>
+        /// Users' answers in exam.
+        /// </summary>
+        public List<UserExam> UserExams { get; set; } = new List<UserExam>();
     }
 }
