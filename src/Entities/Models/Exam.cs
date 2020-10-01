@@ -31,6 +31,9 @@ namespace Entities.Models
         /// </summary>
         public List<User> Users { get; set; } = new List<User>();
 
+        /// <summary>
+        /// Questions in exam.
+        /// </summary>
         public List<Question> Questions { get; set; } = new List<Question>();
     }
 }
