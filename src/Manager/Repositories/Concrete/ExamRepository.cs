@@ -6,6 +6,7 @@ using Microsoft.Extensions.Caching.Memory;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -81,6 +82,33 @@ namespace Manager.Repositories.Concrete
         public override void Insert(Exam value)
         {
             Add(value);
+        }
+
+        /// <summary>
+        /// Begin exam for single user.
+        /// </summary>
+        /// <param name="examId">
+        /// Document id of exam entity.
+        /// </param>
+        /// <param name="user">
+        /// User entity.
+        /// </param>
+        /// <returns>
+        /// Exam.
+        /// </returns>
+        public virtual async Task<Exam> BeginExamForUserAsync(string examId, User user)
+        {
+            var exam = base.GetActiveRules().FirstOrDefault(x => x.Id == examId) ?? throw new EntityNotFoundException(nameof(Exam));
+            exam.Users.Add(user);
+            if (user.UserExams.Count() > 0)
+                throw new FlowException(nameof(UserExam));
+            await base.UpdateAsync(exam);
+            return exam;
+        }
+
+        public override IQueryable<Exam> GetActiveRules()
+        {
+            return base.GetActiveRules().Where(x=>!x.IsDeleted);
         }
     }
 }
