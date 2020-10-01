@@ -7,7 +7,7 @@ namespace Entities.Models
     /// <summary>
     /// Users taking exam.
     /// </summary>
-    public class User
+    public class User : BaseModel
     {
         /// <summary>
         /// User's name
