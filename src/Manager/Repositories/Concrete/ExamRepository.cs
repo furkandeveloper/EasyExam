@@ -106,6 +106,12 @@ namespace Manager.Repositories.Concrete
             return exam;
         }
 
+        /// <summary>
+        /// Document active rules for exam entity.
+        /// </summary>
+        /// <returns>
+        /// Queryable Exam.
+        /// </returns>
         public override IQueryable<Exam> GetActiveRules()
         {
             return base.GetActiveRules().Where(x=>!x.IsDeleted);
