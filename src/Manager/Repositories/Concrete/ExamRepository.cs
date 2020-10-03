@@ -98,7 +98,7 @@ namespace Manager.Repositories.Concrete
         /// </returns>
         public virtual async Task<Exam> BeginExamForUserAsync(string examId, User user)
         {
-            var exam = base.GetActiveRules().FirstOrDefault(x => x.Id == examId) ?? throw new EntityNotFoundException(nameof(Exam));
+            var exam = await FindActiveExamAsync(examId);
             exam.Users.Add(user);
             if (exam.StartDate > DateTime.UtcNow)
                 throw new ExamNotStartException(nameof(Exam));
@@ -119,6 +119,22 @@ namespace Manager.Repositories.Concrete
         public override IQueryable<Exam> GetActiveRules()
         {
             return base.GetActiveRules().Where(x=>!x.IsDeleted);
+        }
+
+        public async Task AnswerQuestionAsync(string examId, string questionId, string userId,UserExam userExam)
+        {
+            var exam = await FindActiveExamAsync(examId);
+            if(exam.Questions.Any(x=>x.Id == questionId))
+            {
+                var user = exam.Users.FirstOrDefault(x => x.Id == userId) ?? throw new EntityNotFoundException(nameof(Exam));
+                user.UserExams.Add(userExam);
+                await base.ReplaceAsync(exam);
+            }
+        }
+
+        private async Task<Exam> FindActiveExamAsync(string examId)
+        {
+            return base.GetActiveRules().FirstOrDefault(x => x.Id == examId) ?? throw new EntityNotFoundException(nameof(Exam));
         }
     }
 }
