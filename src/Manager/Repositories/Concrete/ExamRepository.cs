@@ -100,6 +100,10 @@ namespace Manager.Repositories.Concrete
         {
             var exam = base.GetActiveRules().FirstOrDefault(x => x.Id == examId) ?? throw new EntityNotFoundException(nameof(Exam));
             exam.Users.Add(user);
+            if (exam.StartDate > DateTime.UtcNow)
+                throw new ExamNotStartException(nameof(Exam));
+            if (exam.EndDate < DateTime.UtcNow)
+                throw new AlreadyDoneExamException(nameof(Exam));
             if (user.UserExams.Count() > 0)
                 throw new FlowException(nameof(UserExam));
             await base.UpdateAsync(exam);
