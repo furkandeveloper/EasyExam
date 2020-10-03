@@ -24,5 +24,22 @@ namespace Manager.Repositories.Abstractions
         /// Exam.
         /// </returns>
         Task<Exam> BeginExamForUserAsync(string examId, User user);
+
+        /// <summary>
+        /// Answer the question.
+        /// </summary>
+        /// <typeparam name="T">
+        /// IAnswerModel inherited answer model entity.
+        /// </typeparam>
+        /// <param name="examId">
+        /// Exam documentId.
+        /// </param>
+        /// <param name="questionId">
+        /// Question documentId.
+        /// </param>
+        /// <param name="answer">
+        /// Answer model.
+        /// </param>
+        Task AnswerQuestionAsync(string examId, string questionId,string userId ,UserExam userExam);
     }
 }
