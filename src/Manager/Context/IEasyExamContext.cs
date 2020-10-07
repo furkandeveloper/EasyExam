@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Manager.Context
 {
+    /// <summary>
+    /// This interface includes database entities.
+    /// </summary>
     public interface IEasyExamContext
     {
         IMongoCollection<Exam> Exams { get; }
