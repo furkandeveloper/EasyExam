@@ -99,13 +99,13 @@ namespace Manager.Repositories.Concrete
         public virtual async Task<Exam> BeginExamForUserAsync(string examId, User user)
         {
             var exam = await FindActiveExamAsync(examId);
-            exam.Users.Add(user);
             if (exam.StartDate > DateTime.UtcNow)
                 throw new ExamNotStartException(nameof(Exam));
             if (exam.EndDate < DateTime.UtcNow)
                 throw new AlreadyDoneExamException(nameof(Exam));
             if (user.UserExams.Count() > 0)
                 throw new FlowException(nameof(UserExam));
+            exam.Users.Add(user);
             await base.UpdateAsync(exam);
             return exam;
         }
@@ -121,7 +121,25 @@ namespace Manager.Repositories.Concrete
             return base.GetActiveRules().Where(x=>!x.IsDeleted);
         }
 
-        public async Task AnswerQuestionAsync(string examId, string questionId, string userId,UserExam userExam)
+        /// <summary>
+        /// Set Answer question.
+        /// </summary>
+        /// <param name="examId">
+        /// Exam document id.
+        /// </param>
+        /// <param name="questionId">
+        /// Question document id.
+        /// </param>
+        /// <param name="userId">
+        /// User document id.
+        /// </param>
+        /// <param name="userExam">
+        /// User Exam entity.
+        /// </param>
+        /// <returns>
+        /// NoContent.
+        /// </returns>
+        public async Task SetAnswerQuestionAsync(string examId, string questionId, string userId,UserExam userExam)
         {
             var exam = await FindActiveExamAsync(examId);
             if(exam.Questions.Any(x=>x.Id == questionId))
@@ -130,8 +148,19 @@ namespace Manager.Repositories.Concrete
                 user.UserExams.Add(userExam);
                 await base.ReplaceAsync(exam);
             }
+            else
+                throw new EntityNotFoundException(nameof(Question));
         }
 
+        /// <summary>
+        /// Find exam with examId.
+        /// </summary>
+        /// <param name="examId">
+        /// Document id.
+        /// </param>
+        /// <returns>
+        /// Exam entity.
+        /// </returns>
         private async Task<Exam> FindActiveExamAsync(string examId)
         {
             return base.GetActiveRules().FirstOrDefault(x => x.Id == examId) ?? throw new EntityNotFoundException(nameof(Exam));
