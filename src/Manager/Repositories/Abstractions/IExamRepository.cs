@@ -40,6 +40,6 @@ namespace Manager.Repositories.Abstractions
         /// <param name="answer">
         /// Answer model.
         /// </param>
-        Task AnswerQuestionAsync(string examId, string questionId,string userId ,UserExam userExam);
+        Task SetAnswerQuestionAsync(string examId, string questionId,string userId ,UserExam userExam);
     }
 }
