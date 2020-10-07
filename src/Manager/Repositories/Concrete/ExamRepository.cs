@@ -213,7 +213,7 @@ namespace Manager.Repositories.Concrete
             return counter;
         }
 
-        private async Task GetResultExamForUser(string userId)
+        private async Task GetResultExamForUser(string examId,string userId)
         {
 
         }
