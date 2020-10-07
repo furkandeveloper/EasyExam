@@ -43,7 +43,7 @@ namespace Manager.Repositories.Concrete
                 switch (item.QuestionType)
                 {
                     case QuestionType.MultipleChoice:
-                        if (item.Answers.GetType() == typeof(List<MultipleChoiceAnswer>)) 
+                        if (item.Answers.GetType() == typeof(List<MultipleChoiceAnswer>))
                         { throw new ParameterException("WrongParameter"); }
                         break;
                     case QuestionType.Classical:
@@ -118,7 +118,7 @@ namespace Manager.Repositories.Concrete
         /// </returns>
         public override IQueryable<Exam> GetActiveRules()
         {
-            return base.GetActiveRules().Where(x=>!x.IsDeleted);
+            return base.GetActiveRules().Where(x => !x.IsDeleted);
         }
 
         /// <summary>
@@ -139,14 +139,17 @@ namespace Manager.Repositories.Concrete
         /// <returns>
         /// NoContent.
         /// </returns>
-        public async Task SetAnswerQuestionAsync(string examId, string questionId, string userId,UserExam userExam)
+        public async Task SetAnswerQuestionAsync(string examId, string questionId, string userId, UserExam userExam)
         {
             var exam = await FindActiveExamAsync(examId);
-            if(exam.Questions.Any(x=>x.Id == questionId))
+            if (exam.Questions.Any(x => x.Id == questionId))
             {
                 var user = exam.Users.FirstOrDefault(x => x.Id == userId) ?? throw new EntityNotFoundException(nameof(Exam));
-                user.UserExams.Add(userExam);
-                await base.ReplaceAsync(exam);
+                if (!user.UserExams.Any(x => x.QuestionId == questionId))
+                {
+                    user.UserExams.Add(userExam);
+                    await base.ReplaceAsync(exam);
+                }
             }
             else
                 throw new EntityNotFoundException(nameof(Question));
