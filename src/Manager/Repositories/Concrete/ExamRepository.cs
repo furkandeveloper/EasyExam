@@ -1,6 +1,7 @@
 ﻿using Entities.Models;
 using Manager.Context;
 using Manager.Exceptions;
+using Manager.Models;
 using Manager.Repositories.Abstractions;
 using Microsoft.Extensions.Caching.Memory;
 using MongoDB.Driver;
@@ -167,6 +168,54 @@ namespace Manager.Repositories.Concrete
         private async Task<Exam> FindActiveExamAsync(string examId)
         {
             return base.GetActiveRules().FirstOrDefault(x => x.Id == examId) ?? throw new EntityNotFoundException(nameof(Exam));
+        }
+
+        public async Task<List<SummaryExamResult>> GetAllSummaryResultExamAsync(string examId)
+        {
+            List<SummaryExamResult> resultExams = new List<SummaryExamResult>();
+            var exam = await FindActiveExamAsync(examId);
+            foreach (var item in exam.Users)
+            {
+                var totalQuestion = exam.Questions.Where(x => !x.IsCanceled && !x.IsDeleted).Count();
+                var totalCorrectAnswer = CalculateTotalCorrect(exam.Questions, item.UserExams);
+                resultExams.Add(new SummaryExamResult()
+                {
+                    User = item,
+                    TotalQuestion = totalQuestion,
+                    TotalCorrect = totalCorrectAnswer,
+                    TotalWrong = totalQuestion-totalQuestion
+                });
+            }
+            return resultExams;
+        }
+
+        // TODO: Must be refactor by answer type.
+        /// <summary>
+        /// Calculate total correct answer.
+        /// </summary>
+        /// <param name="questions">
+        /// Questions of exam.
+        /// </param>
+        /// <param name="userExams">
+        /// Answers of user.
+        /// </param>
+        /// <returns></returns>
+        private int CalculateTotalCorrect(List<Question> questions, List<UserExam> userExams)
+        {
+            int counter = 0;
+            foreach (var question in questions)
+            {
+                var answers = question.Answers as List<MultipleChoiceAnswer>;
+                var correctAnswer = answers.FirstOrDefault(x => x.IsCorrect && !x.IsDeleted);
+                if (correctAnswer.Id == userExams.FirstOrDefault(x => x.QuestionId == question.Id).Answer)
+                    counter++;
+            }
+            return counter;
+        }
+
+        private async Task GetResultExamForUser(string userId)
+        {
+
         }
     }
 }

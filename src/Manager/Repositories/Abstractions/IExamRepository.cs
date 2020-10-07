@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Manager.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -41,5 +42,16 @@ namespace Manager.Repositories.Abstractions
         /// Answer model.
         /// </param>
         Task SetAnswerQuestionAsync(string examId, string questionId,string userId ,UserExam userExam);
+
+        /// <summary>
+        /// Get all exam summary result of users.
+        /// </summary>
+        /// <param name="examId">
+        /// Document id.
+        /// </param>
+        /// <returns>
+        /// Result Exam.
+        /// </returns>
+        Task<List<SummaryExamResult>> GetAllSummaryResultExamAsync(string examId);
     }
 }
